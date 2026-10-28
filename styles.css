@@ -27,6 +27,7 @@ body { background: #03080f; color: #fff; }
 .input-wrap input::placeholder { color:#8794a3; }
 .input-wrap:focus-within { border-color:#12c574; }
 .status { height:13px; margin:4px 0 0; font-size:12px; color:#28d17c; }
+.status.is-error { color:#ff6b6b; }
 .continue-button { width:min(520px,100%); height:54px; margin-top:8px; border:0; border-radius:5px; background:#0bce78; color:#082519; font-size:17px; font-weight:700; cursor:pointer; }
 .continue-button span { margin-left:8px; font-size:22px; vertical-align:-1px; }
 .continue-button:hover { background:#16dc86; }
@@ -41,3 +42,19 @@ footer { position:relative; z-index:2; width:min(710px,88vw); margin:38px auto 0
 footer > p { margin-top:28px; color:#566171; font-size:10px; }
 footer > p span { margin:0 7px; }
 @media(max-width:600px){ .app-shell{padding:20px 10px}.brand{height:130px}.brand img{width:155px;height:80px}.decor{top:82px;transform:scale(.6)}.left-chip{left:-55px}.right-cards{right:-35px}.activation-card{width:94vw;padding:36px 18px 28px}.trust-row span{font-size:0}.trust-row span b{font-size:19px}.instructions br{display:none} }
+
+.landing-page { min-height:100vh; position:relative; display:grid; place-items:center; overflow:hidden; padding:24px; background:radial-gradient(circle at 50% 35%,rgba(23,184,116,.18),transparent 32%),linear-gradient(145deg,#05080d,#091522 60%,#05090f); }
+.landing-glow { position:absolute; width:520px; height:520px; border-radius:50%; background:rgba(13,206,120,.08); filter:blur(100px); }
+.landing-card { position:relative; z-index:1; width:min(620px,92vw); padding:48px 38px 42px; text-align:center; border:1px solid rgba(255,255,255,.08); border-radius:18px; background:rgba(14,23,34,.94); box-shadow:0 30px 80px rgba(0,0,0,.55); }
+.landing-logo { width:180px; filter:brightness(0) invert(1); }
+.verified-badge { display:inline-block; margin-top:24px; padding:7px 12px; border-radius:999px; background:rgba(11,206,120,.12); color:#29dd8a; font-size:12px; font-weight:700; }
+.landing-card h1 { margin:18px 0 8px; font-size:38px; }
+.landing-card > p { margin:0 0 30px; color:#9eabba; }
+.landing-actions { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.landing-actions button { min-height:58px; border-radius:7px; font-size:16px; font-weight:700; cursor:pointer; }
+.start-panel-button { border:1px solid #3a4c60; background:#172331; color:#fff; }
+.enter-game-button { border:0; background:#0bce78; color:#082519; }
+.start-panel-button:hover { background:#203148; }
+.enter-game-button:hover { background:#16dc86; }
+.landing-status { margin-top:20px; color:#29dd8a; font-size:13px; }
+@media(max-width:600px){ .landing-card{padding:38px 18px 32px}.landing-card h1{font-size:30px}.landing-actions{grid-template-columns:1fr}.landing-logo{width:150px} }

@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react'
 
+const ACTIVATION_IDS = ['8757603560']
+
 export default function App() {
   const [loading, setLoading] = useState(true)
   const [code, setCode] = useState('')
   const [status, setStatus] = useState('')
+  const [activated, setActivated] = useState(false)
+  const [landingAction, setLandingAction] = useState('')
 
   useEffect(() => {
     const timer = window.setTimeout(() => setLoading(false), 2200)
@@ -17,11 +21,35 @@ export default function App() {
 
   function handleSubmit(event) {
     event.preventDefault()
-    setStatus(code.length === 10 ? 'Activation code accepted' : 'Enter the complete 10-digit code')
+
+    if (!ACTIVATION_IDS.includes(code)) {
+      setStatus(code.length === 10 ? 'Invalid activation code' : 'Enter the complete 10-digit code')
+      return
+    }
+
+    setStatus('Activation code accepted')
+    window.setTimeout(() => setActivated(true), 350)
   }
 
   return (
     <>
+      {activated ? (
+        <main className="landing-page">
+          <div className="landing-glow" aria-hidden="true" />
+          <section className="landing-card" aria-labelledby="landing-title">
+            <img className="landing-logo" src="/images/stake-full.B38fTPet.svg" alt="Stake" />
+            <div className="verified-badge">✓ Code Activated</div>
+            <h1 id="landing-title">Welcome to Stake</h1>
+            <p>Choose where you want to go.</p>
+            <div className="landing-actions">
+              <button type="button" className="start-panel-button" onClick={() => setLandingAction('Control panel opened')}>Start Panel</button>
+              <button type="button" className="enter-game-button" onClick={() => setLandingAction('Game entry opened')}>Enter in Game</button>
+            </div>
+            {landingAction && <div className="landing-status" role="status">{landingAction}</div>}
+          </section>
+        </main>
+      ) : (
+        <>
       <div className={`preloader ${loading ? '' : 'is-hidden'}`} role="status" aria-label="Loading Stake">
         <img src="/images/stake-preloader-with-hold-en.avif" alt="Stake loading" />
       </div>
@@ -41,7 +69,7 @@ export default function App() {
               <span className="shield" aria-hidden="true">⬡</span>
               <input value={code} onChange={handleCodeChange} type="password" inputMode="numeric" maxLength={10} placeholder="Activation Code" aria-label="Activation Code" />
             </div>
-            <p id="status" className="status" aria-live="polite">{status}</p>
+            <p id="status" className={`status ${status === 'Invalid activation code' ? 'is-error' : ''}`} aria-live="polite">{status}</p>
             <button className="continue-button" type="submit">Continue <span>→</span></button>
           </form>
           <div className="divider"><span>OR</span></div>
@@ -56,6 +84,8 @@ export default function App() {
           <p>Stake <span>•</span> Play Responsibly</p>
         </footer>
       </main>
+        </>
+      )}
     </>
   )
 }
