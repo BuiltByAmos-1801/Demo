@@ -1,51 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stake</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div class="preloader" id="preloader" role="status" aria-label="Loading Stake">
-    <img src="images/stake-preloader-with-hold-en.avif" alt="Stake loading">
-  </div>
-  <main class="app-shell">
-    <div class="decor left-chip" aria-hidden="true"><span>Stake</span></div>
-    <div class="decor right-cards" aria-hidden="true"><i>A</i><i>A</i></div>
-
-    <header class="brand">
-      <img src="images/stake-full.B38fTPet.svg" alt="Stake">
-      <p>PLAY BIGGER</p>
-    </header>
-
-    <section class="activation-card" aria-labelledby="activation-title">
-      <div class="lock" aria-hidden="true"></div>
-      <h1 id="activation-title">Enter Activation Code</h1>
-      <p class="instructions">Please enter the activation code sent to your email<br>or provided by your partner to access your account.</p>
-
-      <form id="activation-form" autocomplete="off">
-        <div class="input-wrap">
-          <span class="shield" aria-hidden="true">⬡</span>
-          <input id="activation-code" type="password" inputmode="numeric" maxlength="10" placeholder="Activation Code" aria-label="Activation Code">
-        </div>
-        <p id="status" class="status" aria-live="polite"></p>
-        <button class="continue-button" type="submit">Continue <span>→</span></button>
-      </form>
-
-      <div class="divider"><span>OR</span></div>
-      <a class="support-button" href="https://t.me/+Q1kSj161br0xM2I1" target="_blank" rel="noopener noreferrer"><span>♧</span> Contact Support</a>
-    </section>
-
-    <footer>
-      <div class="trust-row">
-        <span><b>♢</b> Safe &amp; Secure</span>
-        <span><b>ϟ</b> Fast Payouts</span>
-        <span><b>◎</b> Global Access</span>
-      </div>
-      <p>Stake <span>•</span> Play Responsibly</p>
-    </footer>
-  </main>
-  <script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stake</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
