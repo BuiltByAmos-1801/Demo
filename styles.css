@@ -1,0 +1,214 @@
+* { box-sizing: border-box; }
+
+:root {
+  color-scheme: dark;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html, body { margin: 0; min-height: 100%; }
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #070708;
+}
+
+.app-shell {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+  padding-top: 33vh;
+  background:
+    radial-gradient(ellipse 62% 24% at 50% 45%, rgba(36, 36, 40, .22), transparent 72%),
+    linear-gradient(180deg, #090909 0%, #050506 100%);
+}
+
+.app-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 26% 15%, rgba(255,255,255,.018), transparent 1px),
+    radial-gradient(circle at 73% 71%, rgba(255,255,255,.012), transparent 1px);
+  background-size: 5px 5px;
+}
+
+h1 {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  font-size: clamp(23px, 4.4vw, 38px);
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -.4px;
+  color: #c8324b;
+  text-shadow: 0 0 6px rgba(218, 28, 58, .9), 0 0 22px rgba(218, 28, 58, .18);
+}
+
+h1 span {
+  color: #bf3045;
+  white-space: nowrap;
+}
+
+.plane {
+  width: min(290px, 70vw);
+  height: 142px;
+  margin: 30px auto 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.plane svg { width: 100%; height: 100%; overflow: visible; }
+
+form {
+  position: relative;
+  z-index: 2;
+  width: min(620px, 92vw);
+  margin: 2px auto 0;
+}
+
+label {
+  display: block;
+  margin-bottom: 25px;
+  color: #bc3044;
+  font-size: clamp(18px, 3vw, 27px);
+  font-weight: 800;
+  text-shadow: 0 0 8px rgba(218, 28, 58, .35);
+}
+
+.code-box {
+  width: 370px;
+  height: 74px;
+  max-width: 72vw;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 8px;
+  background: #d9271d;
+  box-shadow: 0 3px 18px rgba(214, 13, 30, .12);
+  border: 1px solid rgba(255,255,255,.14);
+}
+
+.code-box::before {
+  content: "";
+  position: absolute;
+  left: 17px;
+  top: 16px;
+  width: 56px;
+  height: 40px;
+  border-radius: 9px;
+  border: 3px solid #a90e1d;
+  background: rgba(120,0,12,.12);
+}
+
+.copy-button {
+  position: absolute;
+  left: 23px;
+  top: 23px;
+  z-index: 2;
+  width: 34px;
+  height: 24px;
+  border: 0;
+  border-radius: 50%;
+  color: transparent;
+  cursor: pointer;
+  background: #050505;
+}
+
+.copy-icon { font-size: 0; }
+.copy-button::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  position: absolute;
+  left: 12px;
+  top: 8px;
+  border-radius: 50%;
+  background: #eb1c34;
+}
+
+input {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 267px;
+  height: 54px;
+  border: 0;
+  border-radius: 3px;
+  outline: 0;
+  background: #fff;
+  color: #111;
+  text-align: center;
+  font-family: monospace;
+  font-weight: 700;
+  font-size: 25px;
+  letter-spacing: 7px;
+}
+
+input::placeholder { color: #111; opacity: 1; letter-spacing: 7px; }
+input:focus { box-shadow: inset 0 0 0 2px #d32c43; }
+
+.refresh-button {
+  width: 70px;
+  height: 70px;
+  margin: 23px auto 8px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #dc253d;
+  cursor: pointer;
+  filter: drop-shadow(0 0 5px rgba(220,37,61,.45));
+}
+
+.refresh-button span {
+  font-family: Arial, sans-serif;
+  font-size: 76px;
+  font-weight: 100;
+  line-height: 55px;
+  transform: translateY(-5px);
+}
+
+.continue-button {
+  min-width: 118px;
+  height: 54px;
+  border: 0;
+  border-radius: 0;
+  margin-top: 8px;
+  padding: 0 18px;
+  background: #4caf50;
+  color: #091109;
+  font-size: 17px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 0 0 rgba(76,175,80,0);
+  transition: transform .12s, background .12s, box-shadow .12s;
+}
+
+.continue-button:hover { background: #58bf5c; box-shadow: 0 0 16px rgba(76,175,80,.25); }
+.continue-button:active { transform: scale(.96); }
+
+.status {
+  height: 18px;
+  margin: -3px 0 0;
+  font-size: 13px;
+  color: #cf334a;
+}
+
+@media (max-height: 700px) {
+  .app-shell { padding-top: 22vh; }
+  .plane { height: 112px; margin-top: 18px; }
+  label { margin-bottom: 16px; }
+  .refresh-button { margin-top: 12px; }
+}
+
+@media (max-width: 480px) {
+  .app-shell { padding-top: 28vh; }
+  .code-box { width: 330px; max-width: 88vw; }
+  input { width: calc(100% - 83px); }
+  h1 { font-size: 24px; }
+}
