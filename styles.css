@@ -100,7 +100,34 @@ footer > p span { margin:0 7px; }
 .multiplier-badge { border:1px solid #2f4553; border-radius:999px; padding:5px 14px; background:#213743; font-size:12px; font-weight:700; }
 @keyframes panelFade { from{opacity:0} to{opacity:1} }
 @keyframes panelScale { from{opacity:0;transform:translateY(8px) scale(.96)} to{opacity:1;transform:none} }
-.mg-panel-imported { overflow:auto; }
-.mg-panel-imported > div { min-height:0 !important; padding:8px !important; }
+.mg-panel-imported { width:min(720px, calc(100vw - 24px)); overflow:auto; overscroll-behavior:contain; }
+.mg-panel-imported > div { width:100%; min-height:0 !important; padding:8px !important; }
 .mg-panel-imported .mg-imported-header { cursor:move; touch-action:none; user-select:none; }
-@media(max-width:600px){ .panel-modal{padding:10px}.mg-panel{width:100%;max-height:calc(100vh - 20px)}.mg-panel-body{grid-template-columns:1fr}.game-setup{max-height:none}.mg-board-section{padding:10px}.mg-board{max-width:260px}.mg-panel-header h2{font-size:15px} }
+.mg-panel-imported > div > div { max-width:none !important; }
+.mg-panel-imported main { width:100%; }
+
+@media(max-width:767px){
+  .panel-modal{padding:8px; align-items:center}
+  .mg-panel{width:calc(100vw - 16px);max-height:calc(100dvh - 16px)}
+  .mg-panel-header{min-height:46px}
+  .mg-panel-header h2{font-size:14px;max-width:calc(100% - 90px)}
+  .mg-panel-imported > div{height:auto;padding:6px !important}
+  .mg-panel-imported main{grid-template-columns:minmax(0,1fr) !important}
+  .mg-panel-imported section{grid-column:auto !important}
+  .mg-panel-imported .md\:col-span-5,
+  .mg-panel-imported .md\:col-span-7{grid-column:auto}
+}
+
+@media(max-height:650px){
+  .panel-modal{align-items:center;padding:6px}
+  .mg-panel{width:min(720px,calc(100vw - 12px));max-height:calc(100dvh - 12px)}
+  .mg-panel-header{min-height:42px}
+  .mg-panel-imported > div{padding:5px !important}
+  .mg-panel-imported .mg-board{max-width:230px}
+}
+
+@media(max-width:380px){
+  .mg-panel-imported > div{padding:4px !important}
+  .mg-panel-header h2{font-size:13px}
+  .mg-close-button{width:32px;height:32px;right:7px}
+}

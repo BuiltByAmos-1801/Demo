@@ -19,6 +19,15 @@ export default function MgAlphaPanel({ onClose }) {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [onClose])
 
+  useEffect(() => {
+    function keepPanelInView() {
+      setPanelOffset(offset => clampOffset(offset.x, offset.y))
+    }
+
+    window.addEventListener('resize', keepPanelInView)
+    return () => window.removeEventListener('resize', keepPanelInView)
+  }, [])
+
   function clampOffset(x, y) {
     const panel = panelRef.current
     if (!panel) return { x, y }
