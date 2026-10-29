@@ -64,6 +64,7 @@ footer > p span { margin:0 7px; }
 .mg-panel-header { position:relative; min-height:50px; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #213743; cursor:move; touch-action:none; user-select:none; outline:none; }
 .mg-panel-header:focus-visible { box-shadow:inset 0 0 0 2px rgba(56,189,248,.8); }
 .mg-panel-header h2 { margin:0; font-size:17px; letter-spacing:1px; background:linear-gradient(90deg,#38bdf8,#67e8f9,#fff); -webkit-background-clip:text; color:transparent; }
+.mg-header-logo { position:absolute; left:14px; width:82px; max-height:28px; object-fit:contain; filter:brightness(0) invert(1); pointer-events:none; }
 .mg-logo { position:absolute; left:14px; width:30px; height:30px; display:grid; place-items:center; border:1px solid rgba(56,189,248,.45); border-radius:8px; color:#38bdf8; font-weight:800; }
 .mg-close-button { position:absolute; right:10px; width:34px; height:34px; border:1px solid #213743; border-radius:8px; background:#0f212e; color:#aebed0; font-size:25px; line-height:1; cursor:pointer; }
 .mg-close-button:hover,.mg-close-button:focus-visible { border-color:#38bdf8; color:#fff; outline:none; }

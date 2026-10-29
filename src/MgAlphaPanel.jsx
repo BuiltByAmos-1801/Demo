@@ -105,6 +105,11 @@ export default function MgAlphaPanel({ onClose }) {
           tabIndex={0}
           aria-label="Drag MG ALPHA MOD panel. Use arrow keys to move it."
         >
+          <img
+            className="mg-header-logo"
+            src="/images/stake-full.B38fTPet.svg"
+            alt="Stake"
+          />
           <h2 id="mg-panel-title">MG ALPHA MOD</h2>
           <button
             ref={closeButtonRef}

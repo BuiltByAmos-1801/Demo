@@ -221,7 +221,7 @@ export const SetupForm: React.FC<SetupFormProps> = ({
             <div className="w-full bg-[#1b2b34] h-1 rounded-full overflow-hidden">
               <div
                 className="bg-gradient-to-r from-emerald-500 to-cyan-400 h-full transition-all duration-1000 ease-linear rounded-full"
-                style={{ width: `${Math.max(0, Math.min(100, ((countdown ?? 0) / 10) * 100))}%` }}
+                style={{ width: `${Math.max(0, Math.min(100, ((countdown ?? 0) / 20) * 100))}%` }}
               />
             </div>
           </div>

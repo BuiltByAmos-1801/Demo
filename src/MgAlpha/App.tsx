@@ -131,14 +131,14 @@ export default function App() {
     }
   };
 
-  // 10-Second Auto Refresh Timer Effect
+  // 20-second auto refresh timer
   useEffect(() => {
     if (!hasPredicted) {
       setCountdown(null);
       return;
     }
 
-    setCountdown(10);
+    setCountdown(20);
     const timer = setInterval(() => {
       setCountdown((prev) => {
         if (prev === null) return null;
