@@ -36,12 +36,15 @@ export default function MgAlphaPanel({ onClose }) {
     if (!panel) return { x, y }
 
     const rect = panel.getBoundingClientRect()
-    const maxX = Math.max(0, (window.innerWidth - rect.width) / 2 - 8)
-    const maxY = Math.max(0, (window.innerHeight - rect.height) / 2 - 8)
+    const headerSpace = 48
+    const minX = headerSpace - rect.left - rect.width
+    const maxX = window.innerWidth - headerSpace - rect.left
+    const minY = headerSpace - rect.top - rect.height
+    const maxY = window.innerHeight - headerSpace - rect.top
 
     return {
-      x: Math.max(-maxX, Math.min(maxX, x)),
-      y: Math.max(-maxY, Math.min(maxY, y)),
+      x: Math.max(minX, Math.min(maxX, x)),
+      y: Math.max(minY, Math.min(maxY, y)),
     }
   }
 
