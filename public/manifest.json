@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Stake Floating Panel",
+  "version": "1.0.0",
+  "description": "Displays the panel as a floating overlay in every browser tab.",
+  "permissions": ["storage"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["index.html", "assets/*"],
+      "matches": ["http://*/*", "https://*/*"]
+    }
+  ]
+}

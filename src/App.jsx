@@ -11,6 +11,8 @@ export default function App() {
   const [landingAction, setLandingAction] = useState('')
   const [panelOpen, setPanelOpen] = useState(false)
 
+  const isFloatingPanel = window.location.hash === '#panel'
+
   useEffect(() => {
     const timer = window.setTimeout(() => setLoading(false), 2200)
     return () => window.clearTimeout(timer)
@@ -27,6 +29,16 @@ export default function App() {
     if (!ACTIVATION_IDS.includes(code)) {
       setStatus(code.length === 10 ? 'Invalid activation code' : 'Enter the complete 10-digit code')
       return
+    }
+
+    if (isFloatingPanel) {
+      return (
+        <main className="landing-page">
+          <MgAlphaPanel
+            onClose={() => window.parent.postMessage({ type: 'MG_ALPHA_CLOSE_OVERLAY' }, '*')}
+          />
+        </main>
+      )
     }
 
     setStatus('Activation code accepted')
