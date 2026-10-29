@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import MgAlphaPanel from './MgAlphaPanel'
 
 const ACTIVATION_IDS = ['8757603560']
 
@@ -8,6 +9,7 @@ export default function App() {
   const [status, setStatus] = useState('')
   const [activated, setActivated] = useState(false)
   const [landingAction, setLandingAction] = useState('')
+  const [panelOpen, setPanelOpen] = useState(false)
 
   useEffect(() => {
     const timer = window.setTimeout(() => setLoading(false), 2200)
@@ -42,11 +44,18 @@ export default function App() {
             <h1 id="landing-title">Welcome to Stake</h1>
             <p>Choose where you want to go.</p>
             <div className="landing-actions">
-              <button type="button" className="start-panel-button" onClick={() => setLandingAction('Control panel opened')}>Start Panel</button>
-              <button type="button" className="enter-game-button" onClick={() => setLandingAction('Game entry opened')}>Enter in Game</button>
+              <button type="button" className="start-panel-button" onClick={() => { setLandingAction(''); setPanelOpen(true) }}>Start Panel</button>
+              <button
+                type="button"
+                className="enter-game-button"
+                onClick={() => window.open('https://stake.mba/?offer=mg2&c=MG2', '_blank', 'noopener,noreferrer')}
+              >
+                Enter in Game
+              </button>
             </div>
             {landingAction && <div className="landing-status" role="status">{landingAction}</div>}
           </section>
+          {panelOpen && <MgAlphaPanel onClose={() => setPanelOpen(false)} />}
         </main>
       ) : (
         <>
