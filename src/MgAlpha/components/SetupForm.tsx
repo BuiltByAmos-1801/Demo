@@ -71,8 +71,10 @@ export const SetupForm: React.FC<SetupFormProps> = ({
     onBetAmountChange(newAmount);
   };
 
-  // Both client seed and server seed must be entered for prediction to work
-  const hasValidSeeds = Boolean(clientSeed.trim() && serverSeed.trim());
+  const trimmedClientSeed = clientSeed.trim();
+  const trimmedServerSeed = serverSeed.trim();
+  const hasValidSeeds =
+    trimmedClientSeed.length >= 10 && trimmedServerSeed.length === 64;
 
   return (
     <div className="bg-[#0f212e]/90 backdrop-blur-md rounded-xl border border-[#213743] p-2.5 sm:p-3 shadow-md flex flex-col justify-between gap-2.5 w-full">
@@ -235,7 +237,13 @@ export const SetupForm: React.FC<SetupFormProps> = ({
           hasPredicted={hasPredicted}
           countdown={countdown}
           disabled={!hasPredicted && !hasValidSeeds}
-          disabledReason="Please enter client and server seeds to run prediction"
+          disabledReason={
+            !trimmedClientSeed || !trimmedServerSeed
+              ? 'Please enter client and server seeds to run prediction'
+              : trimmedClientSeed.length < 10
+              ? 'Client seed must contain at least 10 characters'
+              : 'Server seed must contain exactly 64 characters'
+          }
           onPredict={onPredict}
           onReset={onResetNow}
         />

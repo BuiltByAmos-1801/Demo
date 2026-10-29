@@ -69,9 +69,10 @@ export const SeedFields: React.FC<SeedFieldsProps> = ({
           <input
             id="client-seed-input"
             type={showClientSeed ? 'text' : 'password'}
+            minLength={10}
             value={clientSeed}
             onChange={(e) => onClientSeedChange(e.target.value)}
-            placeholder="Enter client seed"
+            placeholder="Enter client seed (min 10 characters)"
             className="w-full bg-[#071824] text-slate-100 text-xs font-mono rounded-lg border border-[#213743] focus:border-sky-400 focus:outline-none focus:ring-1 focus:ring-sky-400/50 pl-2.5 pr-14 py-1 sm:py-1.5 transition-all shadow-inner placeholder:text-slate-600"
           />
 
@@ -120,9 +121,11 @@ export const SeedFields: React.FC<SeedFieldsProps> = ({
           <input
             id="server-seed-input"
             type={showServerSeed ? 'text' : 'password'}
+            minLength={64}
+            maxLength={64}
             value={serverSeed}
             onChange={(e) => onServerSeedChange(e.target.value)}
-            placeholder="Enter server seed"
+            placeholder="Enter 64-character server seed"
             className="w-full bg-[#071824] text-slate-100 text-xs font-mono rounded-lg border border-[#213743] focus:border-sky-400 focus:outline-none focus:ring-1 focus:ring-sky-400/50 pl-2.5 pr-14 py-1 sm:py-1.5 transition-all shadow-inner placeholder:text-slate-600"
           />
 

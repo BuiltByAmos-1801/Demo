@@ -41,7 +41,7 @@ export default function App() {
 
   const handleRegenerateSeeds = () => {
     setClientSeed(generateRandomSeed(12));
-    setServerSeed(generateRandomSeed(32));
+    setServerSeed(generateRandomSeed(64));
   };
 
   const handleResetBoard = () => {
@@ -82,15 +82,15 @@ export default function App() {
 
   const handlePredict = async () => {
     // Bina seed enter kiye prediction button kaam nahi karega
-    if (!clientSeed.trim() || !serverSeed.trim()) {
+    const activeClient = clientSeed.trim();
+    const activeServer = serverSeed.trim();
+
+    if (activeClient.length < 10 || activeServer.length !== 64) {
       return;
     }
 
     setIsPredicting(true);
     setCountdown(null);
-
-    const activeClient = clientSeed.trim();
-    const activeServer = serverSeed.trim();
 
     try {
       // User mapping:
@@ -163,8 +163,8 @@ export default function App() {
         document.activeElement?.tagName !== 'SELECT' &&
         !isPredicting &&
         !hasPredicted &&
-        clientSeed.trim() &&
-        serverSeed.trim()
+        clientSeed.trim().length >= 10 &&
+        serverSeed.trim().length === 64
       ) {
         e.preventDefault();
         handlePredict();
