@@ -362,6 +362,95 @@ dependencies:
   url_launcher: latest
 ```
 
+## Native Android Technology Options
+
+The Android wrapper can be created in either **Kotlin** or **Java**.
+
+### Kotlin Android Wrapper
+
+Use Kotlin for the recommended Android implementation:
+
+```text
+android/app/src/main/kotlin/
+```
+
+Suggested Kotlin classes:
+
+- `MainActivity.kt` for the Android activity
+- `WebAppInterface.kt` for JavaScript-to-Android communication
+- `AppPreferences.kt` for app settings
+
+Enable WebView support in Gradle:
+
+```kotlin
+android {
+    compileSdk = 35
+
+    defaultConfig {
+        applicationId = "com.example.stakepredictor"
+        minSdk = 23
+        targetSdk = 35
+    }
+}
+
+dependencies {
+    implementation("androidx.webkit:webkit:1.12.1")
+    implementation("androidx.core:core-ktx:1.15.0")
+}
+```
+
+Example Kotlin WebView activity:
+
+```kotlin
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val webView = WebView(this)
+        webView.settings.javaScriptEnabled = true
+        webView.settings.domStorageEnabled = true
+        webView.webChromeClient = WebChromeClient()
+        webView.webViewClient = WebViewClient()
+        webView.loadUrl("file:///android_asset/index.html")
+        setContentView(webView)
+    }
+}
+```
+
+### Java Android Wrapper
+
+Java is also supported when maintaining an existing native Android project or team preference:
+
+```text
+android/app/src/main/java/
+```
+
+Example Java WebView activity:
+
+```java
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        WebView webView = new WebView(this);
+        WebSettings settings = webView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setDomStorageEnabled(true);
+        webView.setWebViewClient(new WebViewClient());
+        webView.loadUrl("file:///android_asset/index.html");
+        setContentView(webView);
+    }
+}
+```
+
+### Kotlin or Java Recommendation
+
+- Use Kotlin for new Android applications.
+- Use Kotlin for Android Studio templates and Jetpack Compose.
+- Use Java only when required by an existing Java codebase or organization standard.
+- Kotlin and Java can coexist in the same Android project, but Kotlin is recommended for new code.
+
 The Vite build uses relative assets:
 
 ```js

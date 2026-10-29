@@ -6,7 +6,10 @@ export default function MgAlphaPanel({ onClose }) {
   const closeButtonRef = useRef(null)
   const panelRef = useRef(null)
   const dragRef = useRef(null)
+  const resizeRef = useRef(null)
   const [panelOffset, setPanelOffset] = useState({ x: 0, y: 0 })
+  const [panelSize, setPanelSize] = useState({ width: 720, height: null })
+  const [minimized, setMinimized] = useState(false)
 
   useEffect(() => {
     closeButtonRef.current?.focus()
@@ -86,12 +89,50 @@ export default function MgAlphaPanel({ onClose }) {
     setPanelOffset(offset => clampOffset(offset.x + movement[0], offset.y + movement[1]))
   }
 
+  function startResize(event) {
+    event.preventDefault()
+    const rect = panelRef.current.getBoundingClientRect()
+    resizeRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      width: rect.width,
+      height: rect.height,
+    }
+    event.currentTarget.setPointerCapture(event.pointerId)
+  }
+
+  function moveResize(event) {
+    const resize = resizeRef.current
+    if (!resize || resize.pointerId !== event.pointerId) return
+
+    const width = Math.max(320, Math.min(window.innerWidth - 16, resize.width + event.clientX - resize.startX))
+    const height = Math.max(140, Math.min(window.innerHeight - 16, resize.height + event.clientY - resize.startY))
+    setPanelSize({ width, height })
+  }
+
+  function stopResize(event) {
+    if (resizeRef.current?.pointerId !== event.pointerId) return
+    resizeRef.current = null
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId)
+    }
+  }
+
+  function toggleMinimized() {
+    setMinimized(value => !value)
+  }
+
   return (
     <div className="panel-modal" role="presentation">
       <section
         ref={panelRef}
-        className="mg-panel mg-panel-imported"
-        style={{ transform: `translate(${panelOffset.x}px, ${panelOffset.y}px)` }}
+        className={`mg-panel mg-panel-imported${minimized ? ' is-minimized' : ''}`}
+        style={{
+          width: `${Math.min(panelSize.width, window.innerWidth - 16)}px`,
+          height: minimized ? '46px' : panelSize.height ? `${panelSize.height}px` : undefined,
+          transform: `translate(${panelOffset.x}px, ${panelOffset.y}px)`,
+        }}
         role="dialog"
         aria-labelledby="mg-panel-title"
       >
@@ -105,11 +146,15 @@ export default function MgAlphaPanel({ onClose }) {
           tabIndex={0}
           aria-label="Drag MG ALPHA MOD panel. Use arrow keys to move it."
         >
-          <img
+          <button
+            type="button"
             className="mg-header-logo"
-            src="/images/stake-full.B38fTPet.svg"
-            alt="Stake"
-          />
+            onClick={toggleMinimized}
+            aria-label={minimized ? 'Maximize MG ALPHA MOD panel' : 'Minimize MG ALPHA MOD panel'}
+            title={minimized ? 'Maximize panel' : 'Minimize panel'}
+          >
+            <img src="/images/stake-full.B38fTPet.svg" alt="Stake" />
+          </button>
           <h2 id="mg-panel-title">MG ALPHA MOD</h2>
           <button
             ref={closeButtonRef}
@@ -121,7 +166,19 @@ export default function MgAlphaPanel({ onClose }) {
             ×
           </button>
         </header>
-        <MgAlphaApp />
+        {!minimized && <MgAlphaApp />}
+        {!minimized && (
+          <button
+            type="button"
+            className="mg-resize-handle"
+            onPointerDown={startResize}
+            onPointerMove={moveResize}
+            onPointerUp={stopResize}
+            onPointerCancel={stopResize}
+            aria-label="Resize MG ALPHA MOD panel"
+            title="Drag to resize"
+          />
+        )}
       </section>
     </div>
   )
